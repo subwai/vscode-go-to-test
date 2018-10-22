@@ -1,0 +1,86 @@
+{
+  "name": "go-to-test",
+  "displayName": "Go to Test",
+  "description": "Switch between the code and the test file",
+  "version": "1.0.0",
+  "publisher": "Nautigsam",
+  "icon": "assets/icon.png",
+  "homepage": "https://framagit.org/Nautigsam/vscode-go-to-test.git",
+  "repository": {
+    "type": "git",
+    "url": "https://framagit.org/Nautigsam/vscode-go-to-test.git"
+  },
+  "bugs": {
+    "url": "https://framagit.org/Nautigsam/vscode-go-to-test/issues"
+  },
+  "engines": {
+    "vscode": "^1.22.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "test",
+    "spec",
+    "jest",
+    "rspec",
+    "switcher",
+    "switch"
+  ],
+  "activationEvents": [
+    "onCommand:extension.goToTest"
+  ],
+  "main": "./extension",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Go To Test",
+      "properties": {
+        "goToTest.specFilePatterns": {
+          "type": "array",
+          "title": "Patterns of spec file names",
+          "default": [
+            "{f}.spec{e}",
+            "{f}.test{e}",
+            "{f}-spec{e}",
+            "{f}-test{e}",
+            "{f}_spec{e}",
+            "{f}_test{e}"
+          ],
+          "description": "{f} will be replaced by file name and {e} by file extension",
+          "items": {
+            "type": "string",
+            "title": "Spec file name"
+          }
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "extension.goToTest",
+        "title": "Go to Test"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.goToTest",
+        "key": "ctrl+shift+t",
+        "mac": "cmd+shift+t",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.42",
+    "@types/node": "^8.10.0",
+    "standard": "^11.0.1",
+    "vscode": "^1.1.6"
+  },
+  "dependencies": {
+    "string-similarity": "^2.0.0"
+  }
+}
