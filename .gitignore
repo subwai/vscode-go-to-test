@@ -1,4 +1,5 @@
 node_modules
 *.vsix
 .tool-versions
-.vscode
+.vscode/*
+!.vscode/launch.json
