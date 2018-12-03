@@ -53,7 +53,16 @@ async function findFile(filename, originalFilePath) {
     return null
   }
   const ratings = ss.findBestMatch(originalFilePath, foundUris.map(uri => uri.fsPath))
-  return ratings.bestMatch.target
+  const bestMatch = ratings.bestMatch
+  const alternatives = ratings.ratings.filter(r => r.target !== bestMatch.target)
+  // Tolerancy index is arbitrary and subject to change
+  const tolerancy = 0.05
+  const filteredAlternatives = alternatives.filter(a => Math.abs(bestMatch.rating - a.rating) <= tolerancy)
+  if (filteredAlternatives.length === 0) {
+    return bestMatch.target
+  } else {
+    return vscode.window.showQuickPick([bestMatch.target, ...filteredAlternatives.map(a => a.target)])
+  }
 }
 
 async function openFile(filePath) {
