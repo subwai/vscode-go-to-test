@@ -48,7 +48,7 @@ function getMatchingSpecFileRegex(filename) {
 }
 
 async function findFile(filename, originalFilePath) {
-  const foundUris = await vscode.workspace.findFiles(`**/${filename}`, '**/node_modules/**')
+  const foundUris = await vscode.workspace.findFiles(`**/${filename}`)
   if (foundUris.length === 0) {
     return null
   }
